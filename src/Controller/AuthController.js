@@ -38,14 +38,14 @@ export const login = async (req, res) => {
             return res.status(401).json({ success: false, message: 'Invalid password' });
         }
 
-        const token = jwt.sign({ userId: user.id_usuario }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.cookie('token', token, {
-            httpOnly: true,
-            maxAge: 3600000,
-            sameSite: 'Strict'
+        const token = jwt.sign({ userName: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('authToken', token, {
+            httpOnly: false,
+            secure: false,
+            sameSite: 'none',
+            maxAge: 60 * 60 * 1000
         });
-
-        res.status(200).json({ success: true, data: user.username });
+        res.status(200).json({ success: true, userName: user.username });
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ success: false, message: error.message });

@@ -9,7 +9,13 @@ Product.init({
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },
-    productname: {
+    order: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        unique: true
+    },
+    productName: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -19,6 +25,10 @@ Product.init({
     },
     price: {
         type: DataTypes.DECIMAL,
+        allowNull: false
+    },
+    imageUrl: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 },{
